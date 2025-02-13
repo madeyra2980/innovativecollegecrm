@@ -10,7 +10,7 @@ class Auth {
   // Регистрация
   static async register(req, res) {
     try {
-      const { email, name, sureName, secondName, password } = req.body;
+      const { email, name, surname, secondname, password } = req.body;
 
       let user = await Admin.findOne({ email });
       if (user) return res.status(400).json({ message: "Email уже зарегистрирован" });
@@ -22,8 +22,8 @@ class Auth {
         email,
         password: hashedPassword,
         name,
-        sureName,
-        secondName,
+        surname,
+        secondname,
         isVerified: false,
         verificationToken,
       });
@@ -40,7 +40,7 @@ class Auth {
 
       const verificationLink = `http://localhost:${process.env.PORT}/verify?token=${verificationToken}`;
       await transporter.sendMail({
-        from: '"YourApp" <no-reply@yourapp.com>',
+        from: '"innovative-college" <no-reply@yourapp.com>',
         to: email,
         subject: "Подтвердите вашу почту",
         text: `Нажмите на ссылку для подтверждения: ${verificationLink}`,
@@ -89,12 +89,16 @@ class Auth {
   
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
   
-        res.json({ message: "Вход успешен", token, user: { email: user.email, name: user.name,  } });
+        res.json({ message: "Вход успешен", token, user: {
+           email: user.email,
+           name: user.name, 
+           surname: user.surname,  
+           secondname: user.secondname
+          }});
       } catch (error) {
         res.status(500).json({ message: "Ошибка сервера", error });
       }
     }
-  
 }
 
 export default Auth;
