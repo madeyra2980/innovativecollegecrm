@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import auth from './routes/auth.js'
-
+import teacher from './routes/teachers.js'
 const app = express();
 dotenv.config();
 
@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(auth)
+app.use("/api",auth)
+app.use("/api", teacherRoutes); 
 
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ Подключение к MongoDB установлено"))

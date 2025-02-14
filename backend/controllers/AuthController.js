@@ -7,7 +7,6 @@ import  Admin  from "../models/adminModel.js";
 dotenv.config(); 
 
 class Auth {
-  // Регистрация
   static async register(req, res) {
     try {
       const { email, name, surname, secondname, password } = req.body;
@@ -52,7 +51,6 @@ class Auth {
     }
   }
 
-  // Верификация email
   static async verifyEmail(req, res) {
     try {
       const { token } = req.query;
@@ -74,7 +72,6 @@ class Auth {
     }
   }
   
-    // Вход в систему (логин)
     static async login(req, res) {
       try {
         const { email, password } = req.body;
