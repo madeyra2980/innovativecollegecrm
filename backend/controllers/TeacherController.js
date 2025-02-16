@@ -1,29 +1,25 @@
-import teacherSubject from "../models/teacherSubject";
+import teacher from "../models/teacher.js";
 
-class TeacherSubjectController { 
-    static async TeacherSubjectPost(req, res) { 
+class Teacher { 
+    static async TeacherPost(req, res) { 
         try {
-            const { name, iin, subjects } = req.body;
-
-            const existingTeacher = await teacherSubject.findOne({ name });
+            const { name, iin,  } = req.body;
+            const existingTeacher = await teacher.findOne({ name });
             if (existingTeacher) {
                 return res.status(400).json({ message: "Учитель уже существует" });
             }
-
-            const newTeacher = new teacherSubject({ name, iin, subjects });
-
+            const newTeacher = new teacher({ name, iin });
             await newTeacher.save();
             res.status(201).json({ message: "Учитель успешно добавлен", teacher: newTeacher });
-
         } catch (error) {
             console.error("Ошибка при добавлении учителя:", error);
             res.status(500).json({ message: "Ошибка сервера", error });
         }
     }
 
-    static async TeacherSubjectGet(req, res) { 
+    static async TeacherGet(req, res) { 
         try {
-            const teachers = await teacherSubject.find(); 
+            const teachers = await teacher.find(); 
             res.json(teachers);
         } catch (error) {
             console.error("Ошибка при получении списка учителей:", error);
@@ -31,14 +27,14 @@ class TeacherSubjectController {
         }
     }
 
-    static async TeacherSubjectUpdateById(req, res) { 
+    static async TeacherUpdateById(req, res) { 
         try {
             const { id } = req.params;
-            const { name, iin, subjects } = req.body;
+            const { name } = req.body;
 
-            const updatedTeacher = await teacherSubject.findByIdAndUpdate(
+            const updatedTeacher = await teacher.findByIdAndUpdate(
                 id,
-                { name, iin, subjects },
+                { name, iin },
                 { new: true }
             );
 
@@ -54,14 +50,13 @@ class TeacherSubjectController {
         }
     }
 
-    static async TeacherSubjectUpdateByName(req, res) { 
+    static async TeacherUpdateByName(req, res) { 
         try {
             const { name } = req.params;
-            const { iin, subjects } = req.body;
+            const { iin } = req.body;
 
-            const updatedTeacher = await teacherSubject.findOneAndUpdate(
+            const updatedTeacher = await teacher.findOneAndUpdate(
                 { name },
-                { iin, subjects },
                 { new: true }
             );
 
@@ -77,11 +72,11 @@ class TeacherSubjectController {
         }
     }
 
-    static async TeacherSubjectDeleteById(req, res) { 
+    static async TeacherDeleteById(req, res) { 
         try {
             const { id } = req.params;
 
-            const deletedTeacher = await teacherSubject.findByIdAndDelete(id);
+            const deletedTeacher = await teacher.findByIdAndDelete(id);
             if (!deletedTeacher) {
                 return res.status(404).json({ message: "Учитель не найден" });
             }
@@ -94,11 +89,11 @@ class TeacherSubjectController {
         }
     }
 
-    static async TeacherSubjectDeleteByName(req, res) { 
+    static async TeacherDeleteByName(req, res) { 
         try {
             const { name } = req.params;
 
-            const deletedTeacher = await teacherSubject.findOneAndDelete({ name });
+            const deletedTeacher = await teacher.findOneAndDelete({ name });
             if (!deletedTeacher) {
                 return res.status(404).json({ message: "Учитель не найден" });
             }
@@ -112,4 +107,4 @@ class TeacherSubjectController {
     }
 }
 
-export default TeacherSubjectController;
+export default Teacher;

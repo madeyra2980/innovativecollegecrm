@@ -1,18 +1,14 @@
 import express from "express";
-import TeacherSubjectController from "../controllers/teacherSubjectController";
-
+import Teacher from "../controllers/teacherController.js";
 const router = express.Router();
 
-router.get("/teachers", TeacherSubjectController.TeacherSubjectGet);
 
-router.post("/teachers", TeacherSubjectController.TeacherSubjectPost);
 
-router.put("/teachers/:id", TeacherSubjectController.TeacherSubjectUpdateById);
-
-router.put("/teachers/name/:name", TeacherSubjectController.TeacherSubjectUpdateByName);
-
-router.delete("/teachers/:id", TeacherSubjectController.TeacherSubjectDeleteById);
-
-router.delete("/teachers/name/:name", TeacherSubjectController.TeacherSubjectDeleteByName);
+router.get("/teachers", Teacher.TeacherGet);
+router.post("/teachers", Teacher.TeacherPost);
+router.put("/teachers/:id", Teacher.TeacherUpdateById);
+router.put("/teachers/name/:name", Teacher.TeacherUpdateByName);
+router.delete("/teachers/:id", Teacher.TeacherDeleteById);
+router.delete("/teachers/name/:name", Teacher.TeacherDeleteByName);
 
 export default router;
