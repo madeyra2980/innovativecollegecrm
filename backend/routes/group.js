@@ -8,5 +8,6 @@ router.get("/groups", GroupController.getGroups);
 router.get("/groups/:id", GroupController.getGroupById);
 router.put("/groups/:id", GroupController.updateGroup); 
 router.delete("/groups/:id", GroupController.deleteGroup); 
+router.post("/groups/:id/addStudent", GroupController.addStudentToGroup);
 
 export default router;

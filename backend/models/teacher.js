@@ -6,4 +6,4 @@ const teacherSchema = new Schema({
     iin: { type: String, required: true, unique: true }, 
 }, { timestamps: true });
 
-export default mongoose.model('Teachert', teacherSchema);
+export default mongoose.model('Teacher', teacherSchema);

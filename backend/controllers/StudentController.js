@@ -90,7 +90,7 @@ class StudentController {
                 }
             }
 
-            await student.remove();
+            await student.deleteOne();
             res.status(200).json({ message: 'Студент удален' });
         } catch (err) {
             res.status(500).json({ message: 'Ошибка сервера', error: err.message });

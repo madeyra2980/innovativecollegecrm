@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import ScheduleModel from "../models/schedule.js";
 
 class ScheduleController {
@@ -44,33 +45,40 @@ class ScheduleController {
                 .populate("group", "name")
                 .populate("subject", "name")
                 .populate("teacher", "name");
-
+    
             if (!schedule) {
                 return res.status(404).json({ message: "Расписание не найдено" });
             }
-
+    
             res.status(200).json({ schedule });
         } catch (err) {
             res.status(500).json({ message: "Ошибка сервера", error: err.message });
         }
     }
-
+    
     // ✅ Обновить расписание
     static async updateSchedule(req, res) {
         try {
             const { id } = req.params;
             const { date, group, subject, teacher, time, room } = req.body;
-
+    
+            // Проверка переданных данных
+            if (!date || !group || !subject || !teacher || !time || !room) {
+                return res.status(400).json({ message: "Все поля обязательны" });
+            }
+    
             const updatedSchedule = await ScheduleModel.findByIdAndUpdate(
                 id,
                 { date, group, subject, teacher, time, room },
                 { new: true }
-            );
-
+            ).populate("group", "name")
+             .populate("subject", "name")
+             .populate("teacher", "name");
+    
             if (!updatedSchedule) {
                 return res.status(404).json({ message: "Расписание не найдено" });
             }
-
+    
             res.status(200).json({ message: "Расписание обновлено", schedule: updatedSchedule });
         } catch (err) {
             res.status(500).json({ message: "Ошибка сервера", error: err.message });
@@ -81,12 +89,16 @@ class ScheduleController {
     static async deleteSchedule(req, res) {
         try {
             const { id } = req.params;
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ message: "Некорректный ID" });
+            }
+    
             const schedule = await ScheduleModel.findByIdAndDelete(id);
-
+    
             if (!schedule) {
                 return res.status(404).json({ message: "Расписание не найдено" });
             }
-
+    
             res.status(200).json({ message: "Расписание удалено" });
         } catch (err) {
             res.status(500).json({ message: "Ошибка сервера", error: err.message });

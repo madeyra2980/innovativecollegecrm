@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import GroupModel from "../models/groupModel.js";
 import StudentModel from "../models/studentModel.js";
 
@@ -7,6 +8,8 @@ class GroupController {
         try {
             const { name, students } = req.body;
 
+     
+
             // Проверяем, существует ли уже группа с таким именем
             const existingGroup = await GroupModel.findOne({ name });
             if (existingGroup) {
@@ -14,10 +17,10 @@ class GroupController {
             }
 
             // Проверяем, существуют ли все студенты
-            const validStudents = await StudentModel.find({ _id: { $in: students } });
-            if (validStudents.length !== students.length) {
-                return res.status(400).json({ message: "Некоторые студенты не найдены" });
-            }
+            // const validStudents = await StudentModel.find({ _id: { $in: students } });
+            // if (validStudents.length !== students.length) {
+            //     return res.status(400).json({ message: "Некоторые студенты не найдены" });
+            // }
 
             // Создаем новую группу
             const newGroup = new GroupModel({ name, students });
@@ -93,12 +96,45 @@ class GroupController {
                 return res.status(404).json({ message: "Группа не найдена" });
             }
 
-            await group.remove();
+            // Удаляем ссылку на группу у студентов
+            await StudentModel.updateMany(
+                { group: id },
+                { $pull: { group: id } }
+            );
+
+            await group.deleteOne();
             res.status(200).json({ message: "Группа удалена" });
         } catch (err) {
             res.status(500).json({ message: "Ошибка сервера", error: err.message });
         }
     }
+    static async addStudentToGroup(req, res) {
+        try {
+            const { id } = req.params;  // ID группы
+            const { studentId } = req.body;  // ID студента, который добавляется
+
+            // Проверяем, существует ли группа
+            const group = await GroupModel.findById(id);
+            if (!group) {
+                return res.status(404).json({ message: "Группа не найдена" });
+            }
+
+            // Проверяем, существует ли студент
+            const student = await StudentModel.findById(studentId);
+            if (!student) {
+                return res.status(404).json({ message: "Студент не найден" });
+            }
+
+            // Добавляем студента в группу
+            group.students.push(studentId);  // Добавляем ID студента в массив
+            await group.save();  // Сохраняем изменения
+
+            res.status(200).json({ message: "Студент успешно добавлен в группу", group });
+        } catch (err) {
+            res.status(500).json({ message: "Ошибка сервера", error: err.message });
+        }
+    }
 }
+
 
 export default GroupController;
