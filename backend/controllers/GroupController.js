@@ -7,9 +7,7 @@ class GroupController {
     static async PostGroup(req, res) {
         try {
             const { name, students } = req.body;
-
-     
-
+            
             // Проверяем, существует ли уже группа с таким именем
             const existingGroup = await GroupModel.findOne({ name });
             if (existingGroup) {
@@ -17,10 +15,10 @@ class GroupController {
             }
 
             // Проверяем, существуют ли все студенты
-            // const validStudents = await StudentModel.find({ _id: { $in: students } });
-            // if (validStudents.length !== students.length) {
-            //     return res.status(400).json({ message: "Некоторые студенты не найдены" });
-            // }
+            const validStudents = await StudentModel.find({ _id: { $in: students } });
+            if (validStudents.length !== students.length) {
+                return res.status(400).json({ message: "Некоторые студенты не найдены" });
+            }
 
             // Создаем новую группу
             const newGroup = new GroupModel({ name, students });

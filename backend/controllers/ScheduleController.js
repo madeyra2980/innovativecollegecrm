@@ -5,17 +5,16 @@ class ScheduleController {
     // ✅ Добавить новое расписание
     static async createSchedule(req, res) {
         try {
-            const { date, group, subject, teacher, time, room } = req.body;
- 
+            const { group, subject, teacher, time, room } = req.body;
+            console.log(req.body)
             const newSchedule = new ScheduleModel({
-                date,
                 group,
                 subject,
                 teacher,
                 time,
                 room
             });
-
+            console.log(teacher, "Добавлен")
             await newSchedule.save();
             res.status(201).json({ message: "Расписание добавлено", schedule: newSchedule });
         } catch (err) {
@@ -60,16 +59,16 @@ class ScheduleController {
     static async updateSchedule(req, res) {
         try {
             const { id } = req.params;
-            const { date, group, subject, teacher, time, room } = req.body;
+            const {  group, subject, teacher, time, room } = req.body;
     
             // Проверка переданных данных
-            if (!date || !group || !subject || !teacher || !time || !room) {
+            if ( !group || !subject || !teacher || !time || !room) {
                 return res.status(400).json({ message: "Все поля обязательны" });
             }
     
             const updatedSchedule = await ScheduleModel.findByIdAndUpdate(
                 id,
-                { date, group, subject, teacher, time, room },
+                {  group, subject, teacher, time, room },
                 { new: true }
             ).populate("group", "name")
              .populate("subject", "name")

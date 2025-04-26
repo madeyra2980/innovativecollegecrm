@@ -1,0 +1,315 @@
+/* Основной контейнер */
+.student-table-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  }
+  
+  /* Таблица */
+  .student-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+
+  .student-table th, .student-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  
+  /* Заголовки */
+  .student-table th {
+    background-color: #f2f2f2;
+    cursor: pointer;
+    position: relative;
+  }
+  
+
+.student-table th:hover {
+  background-color: #e6e6e6;
+}
+
+  /* Ячейки */
+  .student-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+  }
+  
+  /* Чередование строк */
+  .student-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+  }
+  
+  /* Эффект при наведении */
+  .student-table tbody tr:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.2s;
+  }
+  
+  /* Сообщения */
+  .loading-message,
+  .empty-message {
+    text-align: center;
+    padding: 24px;
+    color: #666;
+    font-style: italic;
+  }
+
+
+  .add-student-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* Эквивалент space-y-3 */
+  }
+  
+  .add-student-input {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
+  
+  .add-student-button {
+    background-color: #000;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .add-student-button:hover {
+    background-color: #333;
+  }
+  
+  .add-student-message {
+    font-size: 0.875rem;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  /* Стили для модального окна */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.add-student-button {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.add-student-button:hover {
+  background-color: #0b7dda;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Стили для модального окна */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.add-student-button {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.add-student-button:hover {
+  background-color: #0b7dda;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button {
+  background-color: #FFC107;
+  color: black;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-filter {
+  display: flex;
+  gap: 10px;
+}
+
+.search-input, .filter-input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 200px;
+}

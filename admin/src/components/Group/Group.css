@@ -1,0 +1,203 @@
+/* Основные стили */
+.group-table-container {
+    padding: 20px;
+    font-family: "Raleway", sans-serif;
+  }
+  
+  .group-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .group-table th, .group-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .group-table th {
+    background-color: #f2f2f2;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .group-table th:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .group-table th span {
+    position: absolute;
+    right: 8px;
+  }
+  
+  /* Стили для модального окна */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Стили для кнопок */
+  .add-group-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .add-group-button:hover {
+    background-color: #0b7dda;
+  }
+  
+  .actions-cell {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .edit-button {
+    background-color: #FFC107;
+    color: black;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .edit-button:hover {
+    background-color: #e0a800;
+  }
+  
+  .delete-button {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .delete-button:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Стили для поиска и фильтрации */
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .search-filter {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .search-input, .filter-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    min-width: 200px;
+  }
+  
+  /* Сообщения */
+  .loading-message, .empty-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+  }
+  
+  /* Анимации */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @media (max-width: 768px) {
+    .controls {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .search-filter {
+      width: 100%;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .search-input, .filter-input {
+      width: 100%;
+    }
+  }

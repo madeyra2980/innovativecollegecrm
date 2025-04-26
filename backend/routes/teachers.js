@@ -2,8 +2,6 @@ import express from "express";
 import Teacher from "../controllers/teacherController.js";
 const router = express.Router();
 
-
-
 router.get("/teachers", Teacher.TeacherGet);
 router.post("/teachers", Teacher.TeacherPost);
 router.put("/teachers/:id", Teacher.TeacherUpdateById);

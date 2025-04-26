@@ -1,14 +1,12 @@
 import './App.css';
-import { Route, Routes } from 'react-router';
+import { useState, useEffect } from 'react';
+import Schedule from './components/Schedule';
 
 function App() {
+
   return (
     <div className="App">
-      <Routes>
-
-          {/* <Route path='/setings' element = {}/> */}
-            
-      </Routes>
+      <Schedule />
     </div>
   );
 }

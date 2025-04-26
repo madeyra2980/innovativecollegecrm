@@ -10,6 +10,8 @@ class StudentController {
             if (existingStudent) {
                 return res.status(400).json({ message: 'Студент с таким ИИН уже существует' });
             }
+
+            console.log(req.body)
             
             const newStudent = new StudentModel({ name, iin });
             await newStudent.save();
