@@ -201,3 +201,38 @@
       width: 100%;
     }
   }
+
+  .calendar-container {
+    margin: 20px 0;
+  }
+  
+  .dates-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .date-button {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .date-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .date-button.active {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+  }
+  
+  .selected-date {
+    margin: 15px 0;
+    font-size: 1.2em;
+    color: #333;
+  }

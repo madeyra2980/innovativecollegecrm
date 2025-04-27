@@ -3,18 +3,51 @@ import { useDate } from '../../Context/ContextApp';
 import './Schedule.css';
 
 const Schedule = () => {
-  const { selectedDate, schedules, loading, error } = useDate(); // Переименовываем dates в schedules
+  const { selectedDate, schedules, loading, error } = useDate();
 
-  if (loading) return <div>Загрузка...</div>;
-  if (error) return <div>Ошибка: {error}</div>;
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Не указана';
+    
+    try {
+      // Пытаемся обработать строку как ISO дату
+      let date = new Date(dateString);
+      
+      // Если это не сработало, пробуем обработать как timestamp
+      if (isNaN(date.getTime())) {
+        date = new Date(parseInt(dateString));
+      }
+      
+      // Если всё ещё невалидно, возвращаем ошибку
+      if (isNaN(date.getTime())) {
+        console.error('Невалидная дата:', dateString);
+        return 'Неверный формат';
+      }
+      
+      return date.toLocaleDateString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+    } catch (e) {
+      console.error('Ошибка форматирования даты:', e);
+      return 'Ошибка даты';
+    }
+  };
 
-  if (!schedules || !Array.isArray(schedules) || schedules.length === 0) {
+  if (loading) return <div className="loading">Загрузка...</div>;
+  if (error) return <div className="error">Ошибка: {error}</div>;
+
+  if (!schedules || !Array.isArray(schedules)){
+    return <div>Некорректные данные расписания</div>;
+  }
+
+  if (schedules.length === 0) {
     return <div>Нет данных для отображения</div>;
   }
 
   return (
-    <div>
-      <h1>Расписание</h1>
+    <div className="schedule-container">
+      <h1>Расписание на {selectedDate ? formatDate(selectedDate) : 'выбранную дату'}</h1>
       <table className="schedule-table">
         <thead>
           <tr>
@@ -28,16 +61,14 @@ const Schedule = () => {
         </thead>
         <tbody>
           {schedules.map((scheduleItem) => {
-            if (!scheduleItem) return null;
-            
-            // Форматируем дату для отображения
-            const formattedDate = scheduleItem.date 
-              ? new Date(scheduleItem.date).toLocaleDateString() 
-              : 'Не указана';
+            if (!scheduleItem) {
+              console.warn('Пустой элемент расписания');
+              return null;
+            }
             
             return (
-              <tr key={scheduleItem._id}>
-                <td className="date-column">{formattedDate}</td>
+              <tr key={scheduleItem._id || Math.random()}>
+                <td className="date-column">{formatDate(scheduleItem.date)}</td>
                 <td className="group-column">{scheduleItem.group?.name || 'Не указано'}</td>
                 <td className="subject-column">{scheduleItem.subject?.name || 'Не указано'}</td>
                 <td className="teacher-column">{scheduleItem.teacher?.name || 'Не указано'}</td>

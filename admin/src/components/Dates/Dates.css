@@ -1,0 +1,72 @@
+.schedule-calendar {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .date-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+  }
+  
+  .date-navigation button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .date-section {
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  .shift-section {
+    margin-top: 15px;
+  }
+  
+  .time-slots {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .time-slot {
+    flex: 1;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .time-header {
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .lessons-container {
+    min-height: 100px;
+  }
+  
+  .lesson-card {
+    background-color: #f9f9f9;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border-left: 3px solid #4CAF50;
+  }
+  
+  .empty-lesson {
+    color: #999;
+    font-style: italic;
+    padding: 8px;
+  }

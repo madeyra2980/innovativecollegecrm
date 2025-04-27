@@ -7,6 +7,9 @@ const scheduleSchema = new Schema({
     teacher: { type: mongoose.Schema.Types.ObjectId, ref: 'Teacher', require:"true" },
     time: { type: String, required: true }, 
     room: { type: String, required: true }, 
+    // timeslot: { type: Schema.Types.ObjectId, ref: 'TimeSlot' },
+      
+    
 }, { timestamps: true });
 
 export default mongoose.model('Schedule', scheduleSchema);

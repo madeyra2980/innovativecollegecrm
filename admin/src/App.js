@@ -2,19 +2,20 @@ import { Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Student from './components/Students/Student';
 import Group from './components/Group';
-import Schedule from './components/Schedule';
+import Schedule from './components/Schedule/Schedule';
 import Subject from './components/Subject';
 import Teacher from './components/Teacher';
 import logo from './assets/logo.png';
 import Footer from './components/Footer';
+import Dates from './components/Dates';
 
 function App() {
   return (
     <div className="App">
       <header className="app-header">
         <div className="header-container">
-          <div className="logo-container">
-            <img src={logo} alt="Логотип учебного заведения" className="logo-img" />
+          <div className="logo-container"> 
+           <Link to="/"> <img src={logo} alt="Логотип учебного заведения" className="logo-img" /></Link>
             <span className="logo-text">Учебный портал</span>
           </div>
           
@@ -47,6 +48,7 @@ function App() {
           <Route path="/addsubject" element={<Subject />} />
           <Route path="/addteacher" element={<Teacher />} />
           <Route path="/addschedule" element={<Schedule />} />
+          <Route path='/' element = {<Dates/>}/>
         </Routes>
       </main>
 

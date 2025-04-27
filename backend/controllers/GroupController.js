@@ -6,7 +6,7 @@ class GroupController {
     // Создание группы
     static async PostGroup(req, res) {
         try {
-            const { name, students } = req.body;
+            const { name  } = req.body;
             
             // Проверяем, существует ли уже группа с таким именем
             const existingGroup = await GroupModel.findOne({ name });
@@ -15,13 +15,13 @@ class GroupController {
             }
 
             // Проверяем, существуют ли все студенты
-            const validStudents = await StudentModel.find({ _id: { $in: students } });
-            if (validStudents.length !== students.length) {
-                return res.status(400).json({ message: "Некоторые студенты не найдены" });
-            }
+            // const validStudents = await StudentModel.find({ _id: { $in: students } });
+            // if (validStudents.length !== students.length) {
+            //     return res.status(400).json({ message: "Некоторые студенты не найдены" });
+            // }
 
             // Создаем новую группу
-            const newGroup = new GroupModel({ name, students });
+            const newGroup = new GroupModel({ name });
             await newGroup.save();
 
             res.status(201).json({ message: "Группа успешно создана", group: newGroup });
@@ -60,17 +60,11 @@ class GroupController {
     static async updateGroup(req, res) {
         try {
             const { id } = req.params;
-            const { name, students } = req.body;
-
-            // Проверяем, существуют ли все студенты
-            const validStudents = await StudentModel.find({ _id: { $in: students } });
-            if (validStudents.length !== students.length) {
-                return res.status(400).json({ message: "Некоторые студенты не найдены" });
-            }
+            const { name } = req.body;
 
             const updatedGroup = await GroupModel.findByIdAndUpdate(
                 id,
-                { name, students },
+                { name },
                 { new: true }
             );
 
